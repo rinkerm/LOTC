@@ -21,22 +21,14 @@ public class Magic : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Player player = other.GetComponent<Player>();
-        Mage mage = other.GetComponent<Mage>();
-        if (player == null)
+        if (other.GetComponent<Player>() == null)
         {
             Destroy(this.gameObject);
-            if (mage != null)
+            if (other.GetComponent<Mage>() != null)
             {
-                mage.die();
+                other.GetComponent<Mage>().die();
             }
         }
-
-        
-
-
-
-        Destroy(this.gameObject);
     }
     public void setDir(Vector2 dir)
     {

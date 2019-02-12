@@ -8,17 +8,22 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject gameObj;
     private List<GameObject> _shots = new List<GameObject>();
     [SerializeField] private GameObject spellPrefab;
+    [SerializeField] private GameObject h0;
+    [SerializeField] private GameObject h1;
+    [SerializeField] private GameObject h2;
     private Vector2 facing;
     private Animator animator;
     private GameObject _spell;
     private int i = 0;
     private int lastshot;
+    private int health;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         facing = Vector2.down;
         lastshot = 21;
+        health = 6;
     }
 
     // Update is called once per frame
@@ -35,6 +40,31 @@ public class Player : MonoBehaviour
         }
         GetDir();
         lastshot++;
+
+        switch (health)
+        {
+            case 0:
+                h0.GetComponent<Health>().ChangeHealth(2);
+                break;
+            case 1:
+                h0.GetComponent<Health>().ChangeHealth(1);
+                break;
+            case 2:
+                h1.GetComponent<Health>().ChangeHealth(2);
+                break;
+            case 3:
+                h1.GetComponent<Health>().ChangeHealth(1);
+                break;
+            case 4:
+                h2.GetComponent<Health>().ChangeHealth(2);
+                break;
+            case 5:
+                h2.GetComponent<Health>().ChangeHealth(1);
+                break;
+            default:
+                //do nothing
+                break;
+        }
     }
 
     public void Move()
@@ -97,6 +127,32 @@ public class Player : MonoBehaviour
             lastshot = 0;
         }
         
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.GetComponent<Mage>() != null)
+        {
+            StartCoroutine(Bounce());
+            health--;
+        }
+    }
+
+    IEnumerator Bounce()
+    {
+        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+        sprite.color = Color.red;
+        transform.Translate(facing * (-speed * 10) * Time.deltaTime);
+        yield return 10;
+        transform.Translate(facing * (-speed * 10) * Time.deltaTime);
+        yield return 10;
+        transform.Translate(facing * (-speed * 10) * Time.deltaTime);
+        yield return 30;
+        sprite.color = Color.white;
+        yield return 30;
+        sprite.color = Color.red;
+        yield return 30;
+        sprite.color = Color.white;
+
     }
 
 }
