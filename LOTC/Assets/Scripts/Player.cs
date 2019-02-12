@@ -5,27 +5,36 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float speed;
-
+    [SerializeField] private GameObject gameObj;
+    private List<GameObject> _shots = new List<GameObject>();
+    [SerializeField] private GameObject spellPrefab;
     private Vector2 facing;
     private Animator animator;
+    private GameObject _spell;
     private int i = 0;
+    private int lastshot;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         facing = Vector2.down;
+        lastshot = 21;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (transform.rotation.eulerAngles.z != 0)
         {
-            Debug.Log("Pressed Left Click");
+            gameObj.transform.eulerAngles = new Vector3(0, 0, 0);
+        }
+            if (Input.GetMouseButtonDown(0))
+        {
             animator.SetBool("attack", true);
+            Shoot();
         }
         GetDir();
-        
+        lastshot++;
     }
 
     public void Move()
@@ -79,6 +88,15 @@ public class Player : MonoBehaviour
             
         i = i + 1;
     }
-
+    public void Shoot()
+    {
+        if (lastshot > 20)
+        {
+            _spell = Instantiate(spellPrefab,transform.position+ (new Vector3(facing.x,facing.y,0)/5),transform.rotation) as GameObject;
+            _spell.GetComponent<Magic>().setDir(facing);
+            lastshot = 0;
+        }
+        
+    }
 
 }
