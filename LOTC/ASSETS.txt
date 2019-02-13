@@ -6,3 +6,4 @@ Player magic shots: https://opengameart.org/content/bosses-and-monsters-spritesh
 Boss magic shots: https://opengameart.org/content/bosses-and-monsters-spritesheets-ars-notoria
 Hearts: https://opengameart.org/content/25x25-hearts
 UI Box (edited by me): https://opengameart.org/content/dialog-box-0
+Music: https://incompetech.com/wordpress/ (Kevin MacLeod)
