@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class BossTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject boss;
+    void OnTriggerEnter2D(Collider2D other)
     {
-        
-    }
+        if (other.GetComponent<Player>() != null)
+        {
 
-    // Update is called once per frame
-    void Update()
+            //(StartCombat());
+
+
+        }
+    }
+    IEnumerator StartCombat()
     {
-        
+        yield return new WaitForSeconds(1f);
     }
 }
