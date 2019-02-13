@@ -142,15 +142,15 @@ public class Player : MonoBehaviour
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
         sprite.color = Color.red;
         transform.Translate(facing * (-speed * 10) * Time.deltaTime);
-        yield return 10;
+        yield return new WaitForSeconds(.005f);
         transform.Translate(facing * (-speed * 10) * Time.deltaTime);
-        yield return 10;
+        yield return new WaitForSeconds(.005f);
         transform.Translate(facing * (-speed * 10) * Time.deltaTime);
-        yield return 30;
+        yield return new WaitForSeconds(.1f);
         sprite.color = Color.white;
-        yield return 30;
+        yield return new WaitForSeconds(.1f);
         sprite.color = Color.red;
-        yield return 30;
+        yield return new WaitForSeconds(.1f);
         sprite.color = Color.white;
 
     }

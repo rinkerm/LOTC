@@ -21,11 +21,25 @@ public class MusicPlayer : MonoBehaviour
     {
         if (other.GetComponent<Player>() != null)
         {
-            AudioSource source = mplayer.GetComponent<AudioSource>();
-            source.clip =music[1];
-            source.volume = 0.2f;
-            source.Play();
-            Destroy(this);
+
+            StartCoroutine(FadeOut());
+            
+
         }
+    }
+
+    IEnumerator FadeOut()
+    {
+        AudioSource source = mplayer.GetComponent<AudioSource>();
+        source.volume = 0.1f;
+        yield return new WaitForSeconds(1f);
+        source.volume = 0.05f;
+        yield return new WaitForSeconds(1f);
+        source.volume = 0.01f;
+        yield return new WaitForSeconds(1f);
+        source.clip = music[1];
+        source.volume = 0.2f;
+        source.Play();
+        Destroy(this);
     }
 }
