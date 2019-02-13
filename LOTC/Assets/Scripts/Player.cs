@@ -29,8 +29,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.rotation.eulerAngles.z != 0)
-        {
+       if (transform.rotation.eulerAngles.z != 0 || transform.rotation.eulerAngles.y != 0 || transform.rotation.eulerAngles.x != 0)
+            {
             gameObj.transform.eulerAngles = new Vector3(0, 0, 0);
         }
             if (Input.GetMouseButtonDown(0))
