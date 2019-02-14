@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Magic : MonoBehaviour
 {
-    private float mspeed = 1.5f;
+    private float mspeed = 2f;
     public int damage = 1;
     private Vector2 direction;
     // Start is called before the first frame update
@@ -21,7 +21,7 @@ public class Magic : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponent<Player>() == null)
+        if (other.GetComponent<Player>() == null || other.GetComponent<BossTrigger>() == null || other.GetComponent<MusicPlayer>() == null || other.GetComponent<ZombieTrigger>() == null)
         {
             Destroy(this.gameObject);
             if (other.GetComponent<Mage>() != null)

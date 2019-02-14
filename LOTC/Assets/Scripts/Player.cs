@@ -130,15 +130,16 @@ public class Player : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponent<Mage>() != null)
+        if (other.GetComponent<Mage>() != null || other.GetComponent<Boss>() != null || other.GetComponent<Fire>() != null || other.GetComponent<Zombie>() != null) 
         {
             StartCoroutine(Bounce());
-            health--;
+            
         }
     }
 
     IEnumerator Bounce()
     {
+        health--;
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
         sprite.color = Color.red;
         transform.Translate(facing * (-speed * 10) * Time.deltaTime);
@@ -152,6 +153,7 @@ public class Player : MonoBehaviour
         sprite.color = Color.red;
         yield return new WaitForSeconds(.1f);
         sprite.color = Color.white;
+        
 
     }
 
