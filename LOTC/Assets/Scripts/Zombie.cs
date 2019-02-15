@@ -5,17 +5,15 @@ using UnityEngine;
 public class Zombie : MonoBehaviour
 {
     private int health = 3;
-    [SerializeField] GameObject zombie;
     private Animator animator;
     private int i = 90;
     private Vector2 dir;
-    private bool combat;
+    private bool combat=false;
     private float speed = 1f;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        combat = false; ;
     }
 
     // Update is called once per frame
@@ -25,7 +23,7 @@ public class Zombie : MonoBehaviour
         {
             if (transform.rotation.eulerAngles.z != 0 || transform.rotation.eulerAngles.y != 0 || transform.rotation.eulerAngles.x != 0)
             {
-                zombie.transform.eulerAngles = new Vector3(0, 0, 0);
+                this.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
             }
             transform.Translate(dir * speed * Time.deltaTime);
             if (i > 30)
@@ -87,7 +85,7 @@ public class Zombie : MonoBehaviour
 
     private void die()
     {
-        Destroy(zombie);
+        Destroy(this.gameObject);
     }
 
     public void move()

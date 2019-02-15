@@ -5,6 +5,7 @@ using UnityEngine;
 public class Mage : MonoBehaviour
 {
     private Animator animator;
+    [SerializeField] private GameObject textcontroller;
     [SerializeField] private GameObject gameObj;
     // Start is called before the first frame update
     void Start()
@@ -23,5 +24,6 @@ public class Mage : MonoBehaviour
         animator.SetBool("alive", false);
         Destroy(gameObj.GetComponent<BoxCollider2D>());
         Destroy(gameObj.GetComponent<Rigidbody2D>());
+        Destroy(textcontroller);
     }
 }

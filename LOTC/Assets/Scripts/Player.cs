@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float speed;
@@ -11,19 +11,22 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject h0;
     [SerializeField] private GameObject h1;
     [SerializeField] private GameObject h2;
+
     private Vector2 facing;
     private Animator animator;
     private GameObject _spell;
     private int i = 0;
     private int lastshot;
     private int health;
+    private bool vulnerable;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         facing = Vector2.down;
-        lastshot = 21;
+        lastshot = 15;
         health = 6;
+        vulnerable = true;
     }
 
     // Update is called once per frame
@@ -45,6 +48,7 @@ public class Player : MonoBehaviour
         {
             case 0:
                 h0.GetComponent<Health>().ChangeHealth(2);
+                SceneManager.LoadScene("gameover");
                 break;
             case 1:
                 h0.GetComponent<Health>().ChangeHealth(1);
@@ -132,29 +136,31 @@ public class Player : MonoBehaviour
     {
         if (other.GetComponent<Mage>() != null || other.GetComponent<Boss>() != null || other.GetComponent<Fire>() != null || other.GetComponent<Zombie>() != null) 
         {
-            StartCoroutine(Bounce());
+            if(vulnerable)
+                StartCoroutine(Bounce());
             
         }
     }
 
     IEnumerator Bounce()
     {
+        vulnerable = false;
         health--;
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
         sprite.color = Color.red;
-        transform.Translate(facing * (-speed * 10) * Time.deltaTime);
+        transform.Translate(facing * (-speed * 3) * Time.deltaTime);
         yield return new WaitForSeconds(.005f);
-        transform.Translate(facing * (-speed * 10) * Time.deltaTime);
+        transform.Translate(facing * (-speed * 3) * Time.deltaTime);
         yield return new WaitForSeconds(.005f);
-        transform.Translate(facing * (-speed * 10) * Time.deltaTime);
+        transform.Translate(facing * (-speed * 3) * Time.deltaTime);
         yield return new WaitForSeconds(.1f);
         sprite.color = Color.white;
         yield return new WaitForSeconds(.1f);
         sprite.color = Color.red;
         yield return new WaitForSeconds(.1f);
         sprite.color = Color.white;
-        
 
+        vulnerable = true;
     }
 
 }

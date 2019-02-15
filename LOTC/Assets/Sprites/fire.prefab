@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4066545026471671288}
   - component: {fileID: 4066545026471671268}
   - component: {fileID: 4066545026471671269}
-  - component: {fileID: 3588268042387809331}
+  - component: {fileID: 2636432685100934992}
   m_Layer: 0
-  m_Name: fire0
+  m_Name: fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,9 +115,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.009299398, y: -0.08154795}
   serializedVersion: 2
-  m_Radius: 0.15000004
+  m_Radius: 0.0591527
 --- !u!50 &4066545026471671269
 Rigidbody2D:
   serializedVersion: 4
@@ -139,7 +139,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3588268042387809331
+--- !u!114 &2636432685100934992
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

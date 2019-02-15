@@ -38,7 +38,7 @@ public class MusicPlayer : MonoBehaviour
         source.volume = 0.01f;
         yield return new WaitForSeconds(1f);
         source.clip = music[1];
-        source.volume = 0.2f;
+        source.volume = 0.3f;
         source.Play();
         Destroy(this);
     }
